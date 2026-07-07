@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoReward — Recicla, suma puntos, gana dinero</title>
+<meta name="description" content="EcoReward informa tus horarios de recolección de residuos, te enseña a clasificarlos y convierte tu reciclaje en puntos canjeables por dinero.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+<div class="noise-layer" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">
+      <span class="nav-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C9 6 4 8 4 13a8 8 0 0016 0c0-5-5-7-8-11z" fill="#fff"/></svg>
+      </span>
+      <em>Eco</em>Reward
+    </a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#recompensas">Recompensas</a>
+      <a href="#impacto">Impacto</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="app/index.html?tab=login">Iniciar sesión</a>
+      <a class="btn btn-primary" href="app/index.html?tab=register">Crear cuenta</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#recompensas">Recompensas</a>
+    <a href="#impacto">Impacto</a>
+    <a class="btn btn-ghost" href="app/index.html?tab=login">Iniciar sesión</a>
+    <a class="btn btn-primary" href="app/index.html?tab=register">Crear cuenta</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Diseñada para tu comunidad</p>
+      <h1>Tu reciclaje <em>vale plata</em>.<br>Nosotros llevamos la cuenta.</h1>
+      <p class="hero-sub">
+        EcoReward te avisa cuándo pasa el camión recolector, te enseña a separar
+        cada residuo correctamente y convierte cada entrega en puntos que puedes
+        canjear por Yape, vales de descuento o beneficios para el planeta.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="app/index.html?tab=register">
+          Crear cuenta gratis
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-outline btn-lg" href="app/index.html?tab=login">Ya tengo cuenta</a>
+      </div>
+      <p class="hero-note">Sin tarjetas, sin servidores externos: todo se guarda en tu propio navegador.</p>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-topbar">
+            <span class="phone-logo">🌱 EcoReward</span>
+          </div>
+          <p class="phone-greet">¡Bienvenido!<br>Cuidas tu comunidad y el planeta 🌍</p>
+          <div class="phone-points-card">
+            <span class="pp-label">Puntos disponibles</span>
+            <span class="pp-value" id="phonePoints">0</span>
+          </div>
+          <div class="phone-tabs">
+            <div class="phone-tab"><span>🕒</span>Horarios</div>
+            <div class="phone-tab"><span>♻️</span>Reciclar</div>
+            <div class="phone-tab"><span>⭐</span>Premios</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge hero-badge--1">+120 pts</div>
+      <div class="hero-badge hero-badge--2">🎉 ¡Canjeado!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section class="section" id="como-funciona">
+  <p class="section-eyebrow">Cómo funciona</p>
+  <h2 class="section-title">De la basura de tu casa al dinero en tu bolsillo</h2>
+
+  <div class="steps">
+    <article class="step">
+      <span class="step-num">01</span>
+      <div class="step-icon">🕒</div>
+      <h3>Conoce tus horarios</h3>
+      <p>Activa los días y tipos de residuo que recoge tu municipio: orgánicos, reciclables y general. Nunca más se te pasa el camión.</p>
+    </article>
+    <article class="step">
+      <span class="step-num">02</span>
+      <div class="step-icon">♻️</div>
+      <h3>Clasifica y registra</h3>
+      <p>Separa tus residuos con nuestra guía rápida, indica la cantidad y escanea el código del punto de acopio para sumar puntos al instante.</p>
+    </article>
+    <article class="step">
+      <span class="step-num">03</span>
+      <div class="step-icon">🎁</div>
+      <h3>Canjea tus puntos</h3>
+      <p>Convierte lo acumulado en recargas Yape, vales de descuento, kits de reciclaje o en plantar un árbol a tu nombre.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ RECOMPENSAS ============ -->
+<section class="section section-alt" id="recompensas">
+  <p class="section-eyebrow">Recompensas</p>
+  <h2 class="section-title">Puntos que se convierten en algo real</h2>
+  <p class="section-sub">Cada kilo que reciclas tiene un valor. Así se traduce en tu cuenta.</p>
+
+  <div class="rewards-grid">
+    <div class="reward-tile">
+      <span class="rt-emoji">📱</span>
+      <span class="rt-name">Recarga Yape</span>
+      <span class="rt-cost">desde 1,000 pts</span>
+    </div>
+    <div class="reward-tile">
+      <span class="rt-emoji">🧾</span>
+      <span class="rt-name">Vale de descuento</span>
+      <span class="rt-cost">1,200 pts</span>
+    </div>
+    <div class="reward-tile">
+      <span class="rt-emoji">🌳</span>
+      <span class="rt-name">Plantar un árbol</span>
+      <span class="rt-cost">800 pts</span>
+    </div>
+    <div class="reward-tile">
+      <span class="rt-emoji">🧤</span>
+      <span class="rt-name">Kit de reciclaje</span>
+      <span class="rt-cost">600 pts</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPACTO ============ -->
+<section class="section" id="impacto">
+  <p class="section-eyebrow">Impacto esperado</p>
+  <h2 class="section-title">Pequeñas acciones, grandes cambios</h2>
+
+  <div class="impact-grid">
+    <div class="impact-item">
+      <span class="ii-emoji">🌿</span>
+      <span class="ii-text">Comunidad más limpia y saludable</span>
+    </div>
+    <div class="impact-item">
+      <span class="ii-emoji">♻️</span>
+      <span class="ii-text">Mayor cultura de reciclaje</span>
+    </div>
+    <div class="impact-item">
+      <span class="ii-emoji">💰</span>
+      <span class="ii-text">Beneficios económicos para todos</span>
+    </div>
+    <div class="impact-item">
+      <span class="ii-emoji">🌍</span>
+      <span class="ii-text">Cuidado del planeta</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Empieza a ganar por lo que ya reciclas</h2>
+    <p>Crea tu cuenta en un minuto. Tus puntos y tu historial quedan guardados en este dispositivo.</p>
+    <a class="btn btn-primary btn-lg" href="app/index.html?tab=register">Crear cuenta gratis</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><em>Eco</em>Reward</div>
+    <p>Proyecto construido con la metodología Design Thinking: empatizar, definir, idear, prototipar y evaluar junto a vecinos, recicladores y autoridades locales.</p>
+    <div class="footer-links">
+      <a href="app/index.html?tab=login">Iniciar sesión</a>
+      <a href="app/index.html?tab=register">Crear cuenta</a>
+    </div>
+  </div>
+</footer>
+
+<script src="landing.js"></script>
+</body>
+</html>
