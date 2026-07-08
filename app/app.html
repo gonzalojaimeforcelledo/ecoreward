@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EcoReward — Recicla, gana, canjea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- Auth: login / registro -->
+<div class="onboard" id="onboard">
+  <div class="onboard-leaf">🌱</div>
+  <h1><em>Eco</em>Reward</h1>
+  <p class="onboard-sub">Inicia sesión o crea una cuenta para guardar tus puntos, horarios y canjes en este dispositivo.</p>
+
+  <div class="auth-tabs">
+    <button class="auth-tab active" data-tab="login" id="tabLogin">Iniciar sesión</button>
+    <button class="auth-tab" data-tab="register" id="tabRegister">Crear cuenta</button>
+  </div>
+
+  <form class="auth-form active" id="formLogin" autocomplete="off">
+    <input type="text" id="loginId" placeholder="Usuario o correo" autocomplete="username">
+    <input type="password" id="loginPw" placeholder="Contraseña" autocomplete="current-password">
+    <div class="auth-error" id="loginError"></div>
+    <button type="submit" class="primary-auth">Entrar</button>
+  </form>
+
+  <form class="auth-form" id="formRegister" autocomplete="off">
+    <input type="text" id="regName" placeholder="Tu nombre" autocomplete="name">
+    <input type="text" id="regId" placeholder="Usuario o correo" autocomplete="username">
+    <input type="password" id="regPw" placeholder="Contraseña (mín. 4 caracteres)" autocomplete="new-password">
+    <input type="password" id="regPw2" placeholder="Confirmar contraseña" autocomplete="new-password">
+    <div class="auth-error" id="registerError"></div>
+    <button type="submit" class="primary-auth">Crear cuenta</button>
+  </form>
+</div>
+
+<div class="app-shell">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C9 6 4 8 4 13a8 8 0 0016 0c0-5-5-7-8-11z" fill="#fff" opacity="0.95"/></svg>
+      </div>
+      <div>
+        <div class="brand-name"><em>Eco</em>Reward</div>
+        <button class="greeting-btn" id="greetingBtn">
+          <div class="greeting" id="greetingText">Hola 👋 ▾</div>
+        </button>
+      </div>
+    </div>
+    <div class="points-chip">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#F0B429"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span id="chipPoints">0</span>
+    </div>
+    <div class="user-menu" id="userMenu">
+      <div class="user-menu-name" id="userMenuName">—</div>
+      <button id="logoutBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        Cerrar sesión
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ INICIO ============ -->
+    <section class="view active" id="view-inicio">
+      <h2 class="view-title">Tu impacto hoy</h2>
+      <p class="view-sub">Cada residuo bien clasificado suma puntos que puedes convertir en dinero.</p>
+
+      <div class="card growth-card">
+        <div class="ring-wrap">
+          <svg width="176" height="176" viewBox="0 0 176 176">
+            <defs>
+              <linearGradient id="ringGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#3F82E0"/>
+                <stop offset="100%" stop-color="#F0B429"/>
+              </linearGradient>
+            </defs>
+            <circle class="ring-track" cx="88" cy="88" r="78"></circle>
+            <circle class="ring-progress" id="ringProgress" cx="88" cy="88" r="78" stroke-dasharray="490" stroke-dashoffset="490"></circle>
+          </svg>
+          <div class="ring-center">
+            <div class="stage-emoji" id="stageEmoji">🌱</div>
+            <div class="points-big" id="ringPoints">0</div>
+            <div class="points-label">puntos</div>
+          </div>
+        </div>
+        <div class="stage-name" id="stageName">Semilla</div>
+        <div class="stage-next" id="stageNext">Faltan 500 pts para brotar</div>
+
+        <div class="quick-row">
+          <button class="quick-btn" data-goto="reciclar">
+            <strong>📷 Registrar entrega</strong>
+            <span class="qsub">Escanea y suma puntos</span>
+          </button>
+          <button class="quick-btn secondary" data-goto="recompensas">
+            <strong>🎁 Canjear puntos</strong>
+            <span class="qsub">Dinero y beneficios</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card next-pickup" id="nextPickupCard">
+        <div class="np-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4M16 3v4M3 10h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="np-day" id="npDay">Sin recojos activados</div>
+          <div class="np-detail" id="npDetail">Activa un horario en la pestaña Horarios</div>
+        </div>
+      </div>
+
+      <div class="section-label">Impacto esperado</div>
+      <div class="impact-grid">
+        <div class="impact-tile">
+          <div class="impact-num" id="impactKg">0 kg</div>
+          <div class="impact-lbl">Reciclado total</div>
+        </div>
+        <div class="impact-tile">
+          <div class="impact-num" id="impactEntregas">0</div>
+          <div class="impact-lbl">Entregas registradas</div>
+        </div>
+        <div class="impact-tile">
+          <div class="impact-num" id="impactCanjes">S/ 0</div>
+          <div class="impact-lbl">Ganado en canjes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HORARIOS ============ -->
+    <section class="view" id="view-horarios">
+      <h2 class="view-title">Horarios de recolección</h2>
+      <p class="view-sub">Activa los días y tipos de residuo que recoge tu municipio para no perderte el camión.</p>
+
+      <div class="card anim-card">
+        <svg class="waste-scene" viewBox="0 0 600 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animación de una persona depositando residuos en el tacho correcto">
+          <line class="scene-ground" x1="0" y1="150" x2="600" y2="150"></line>
+
+          <!-- Tacho Orgánicos -->
+          <g class="bin">
+            <rect x="88" y="98" width="44" height="52" rx="7" class="bin-body bin-organico"></rect>
+            <rect x="85" y="88" width="50" height="13" rx="5" class="bin-lid bin-lid-organico"></rect>
+            <text x="110" y="168" class="bin-label">Orgánicos</text>
+          </g>
+
+          <!-- Tacho Reciclables -->
+          <g class="bin">
+            <rect x="278" y="98" width="44" height="52" rx="7" class="bin-body bin-reciclable"></rect>
+            <rect x="275" y="88" width="50" height="13" rx="5" class="bin-lid bin-lid-reciclable"></rect>
+            <text x="300" y="168" class="bin-label">Reciclables</text>
+          </g>
+
+          <!-- Tacho General -->
+          <g class="bin">
+            <rect x="468" y="98" width="44" height="52" rx="7" class="bin-body bin-general"></rect>
+            <rect x="465" y="88" width="50" height="13" rx="5" class="bin-lid bin-lid-general"></rect>
+            <text x="490" y="168" class="bin-label">General</text>
+          </g>
+
+          <!-- Bolsas cayendo en cada tacho -->
+          <rect id="bag1" class="drop-bag drop-bag-1" x="102" y="70" width="16" height="14" rx="3"></rect>
+          <rect id="bag2" class="drop-bag drop-bag-2" x="292" y="70" width="16" height="14" rx="3"></rect>
+          <rect id="bag3" class="drop-bag drop-bag-3" x="482" y="70" width="16" height="14" rx="3"></rect>
+
+          <!-- Chispas de puntos -->
+          <text class="drop-spark spark-1" x="110" y="80">✓</text>
+          <text class="drop-spark spark-2" x="300" y="80">✓</text>
+          <text class="drop-spark spark-3" x="490" y="80">✓</text>
+
+          <!-- Persona caminando -->
+          <g id="walker" class="walker">
+            <circle cx="0" cy="96" r="9" class="walker-part"></circle>
+            <line x1="0" y1="105" x2="0" y2="130" class="walker-part walker-thick"></line>
+            <line x1="0" y1="113" x2="15" y2="122" class="walker-part walker-thick"></line>
+            <rect x="9" y="117" width="14" height="12" rx="3" class="walker-bag"></rect>
+            <line x1="0" y1="130" x2="-9" y2="149" class="walker-part walker-thick leg leg-a"></line>
+            <line x1="0" y1="130" x2="9" y2="149" class="walker-part walker-thick leg leg-b"></line>
+          </g>
+        </svg>
+        <p class="anim-caption">Cada residuo en el tacho correcto suma puntos 🎯</p>
+      </div>
+
+      <div class="day-strip" id="dayStrip"></div>
+
+      <div class="card" id="scheduleCard">
+        <div id="wasteRows"></div>
+      </div>
+
+      <div class="card guide-card">
+        <h3>Guía rápida de clasificación</h3>
+        <div class="guide-item"><b>🟫 Orgánicos:</b> restos de comida, cáscaras, poda del jardín.</div>
+        <div class="guide-item"><b>🟩 Reciclables:</b> papel, cartón, plástico, vidrio y metal limpios y secos.</div>
+        <div class="guide-item"><b>⬛ General:</b> lo que no se puede reciclar ni compostar (pañales, colillas, cerámica).</div>
+      </div>
+    </section>
+
+    <!-- ============ RECICLAR ============ -->
+    <section class="view" id="view-reciclar">
+      <h2 class="view-title">Registrar entrega</h2>
+      <p class="view-sub">Elige el tipo de residuo, indica la cantidad y escanea el código del punto de acopio.</p>
+
+      <div class="card">
+        <label class="field-label">Tipo de residuo</label>
+        <div class="type-grid" id="typeGrid"></div>
+
+        <label class="field-label">Cantidad aproximada (kg)</label>
+        <div class="qty-row">
+          <button class="qty-btn" id="qtyMinus">−</button>
+          <div class="qty-value" id="qtyValue">1</div>
+          <button class="qty-btn" id="qtyPlus">+</button>
+        </div>
+
+        <button class="btn-primary" id="scanBtn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="6" height="6" rx="1" stroke="#fff" stroke-width="1.8"/><rect x="15" y="3" width="6" height="6" rx="1" stroke="#fff" stroke-width="1.8"/><rect x="3" y="15" width="6" height="6" rx="1" stroke="#fff" stroke-width="1.8"/><path d="M15 15h2.5M15 18.5h6M20.5 15v6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Escanear código y sumar puntos
+        </button>
+      </div>
+
+      <div class="section-label">Historial de entregas</div>
+      <div class="card" id="logCard">
+        <div class="empty-note" id="logEmpty">Aún no registras entregas. ¡Escanea tu primer código!</div>
+        <div id="logList"></div>
+      </div>
+    </section>
+
+    <!-- ============ RECOMPENSAS ============ -->
+    <section class="view" id="view-recompensas">
+      <h2 class="view-title">Canjea tus puntos</h2>
+      <p class="view-sub">Convierte lo que reciclaste en dinero y beneficios reales.</p>
+
+      <div class="balance-banner">
+        <div>
+          <div class="bb-label">Puntos disponibles</div>
+          <div class="bb-num" id="bannerPoints">0</div>
+        </div>
+        <div class="bb-icon">⭐</div>
+      </div>
+
+      <div id="rewardsList"></div>
+
+      <div class="section-label">Últimos canjes</div>
+      <div class="card">
+        <div class="empty-note" id="redeemEmpty">Todavía no has canjeado puntos.</div>
+        <div id="redeemList"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-view="inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>
+      <span class="nav-label">Inicio</span>
+    </button>
+    <button class="nav-btn" data-view="horarios">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      <span class="nav-label">Horarios</span>
+    </button>
+    <button class="nav-btn" data-view="reciclar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 19a2 2 0 100-4 2 2 0 000 4zM17 19a2 2 0 100-4 2 2 0 000 4z"/><path d="M5 4h2l2 12h9M9 8h11l-2 6H9"/></svg>
+      <span class="nav-label">Reciclar</span>
+    </button>
+    <button class="nav-btn" data-view="recompensas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M3 12h18M12 8v13M12 8c-1.5-4-6-4-6-1.5S9 8 12 8zM12 8c1.5-4 6-4 6-1.5S15 8 12 8z"/></svg>
+      <span class="nav-label">Premios</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Scan overlay -->
+<div class="scan-overlay" id="scanOverlay">
+  <div class="scan-box"><div class="scan-line"></div></div>
+  <p>Escaneando código del punto de acopio…</p>
+</div>
+
+<!-- Confirmación de canje -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-emoji" id="confirmEmoji">🎁</div>
+    <h3 id="confirmTitle">Canjear recompensa</h3>
+    <p id="confirmText">¿Deseas canjear tus puntos?</p>
+    <div class="confirm-balance" id="confirmBalance"></div>
+    <div class="confirm-actions">
+      <button class="btn-ghost" id="confirmCancel" type="button">Cancelar</button>
+      <button class="btn-primary" id="confirmAccept" type="button" style="margin-top:0;">Confirmar canje</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
